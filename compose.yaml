@@ -1,143 +1,66 @@
 version: '3.8'
 
 services:
-  # PostgreSQL database for Open WebUI users
-  postgresql:
-    image: postgres:16-alpine
-    container_name: openwebui-db
+  # PostgreSQL for LiteLLM
+  postgres:
+    image: postgres:15-alpine
+    container_name: litellm-db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: openwebui
-      POSTGRES_USER: openwebui
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme_secure_password}
-      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --lc-collate=C --lc-ctype=C"
+      - POSTGRES_DB=litellm
+      - POSTGRES_USER=litellm
+      - POSTGRES_PASSWORD=litellm_pass
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U openwebui"]
+      test: ["CMD-SHELL", "pg_isready -U litellm -d litellm"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+  # LiteLLM proxy to vLLM
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm-proxy
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml:ro
     networks:
       - internal
-
-  # vLLM inference server with NVIDIA RTX 6000 Ada support
-  vllm:
-    image: vllm/vllm-openai:latest
-    container_name: vllm-server
-    restart: unless-stopped
-    runtime: nvidia
     environment:
-      NVIDIA_VISIBLE_DEVICES: all
-      CUDA_VISIBLE_DEVICES: 0
-      # vLLM configuration for high-concurrency workload
-      VLLM_GPU_MEMORY_UTILIZATION: "0.90"
-      VLLM_MAX_MODEL_LEN: "8192"
-      VLLM_MAX_NUM_SEQS: "256"
-      VLLM_MAX_NUM_BATCHED_TOKENS: "8192"
-      # Enable KV cache optimization
-      VLLM_ENABLE_PREFIX_CACHING: "true"
-      # CPU offloading for better memory management
-      VLLM_CPU_OFFLOAD_GB: "16"
-    volumes:
-      - llm_models_value:/root/.cache/huggingface
-      - vllm_cache:/root/.cache/vllm
-    command: >
-      --model /root/.cache/huggingface/models/your-model-name
-      --host 0.0.0.0
-      --port 8000
-      --served-model-name main-model
-      --max-model-len 8192
-      --gpu-memory-utilization 0.90
-      --max-num-seqs 256
-      --max-num-batched-tokens 8192
-      --enable-prefix-caching
-      --disable-log-requests
-      --tensor-parallel-size 1
-      --trust-remote-code
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
-    shm_size: '16gb'
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-1234}
+      - VLLM_API_BASE=${VLLM_API_BASE:-http://192.168.1.100:8000}
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--detailed_debug"]
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')\""]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 120s
-    networks:
-      - internal
+      start_period: 40s
 
-  # vLLM cache management service
-  vllm-cache-manager:
-    image: alpine:latest
-    container_name: vllm-cache-manager
-    restart: unless-stopped
-    volumes:
-      - vllm_cache:/cache
-    command: >
-      sh -c '
-      while true; do
-        CACHE_SIZE=$$(du -sm /cache | cut -f1);
-        if [ $$CACHE_SIZE -gt 20480 ]; then
-          echo "Cache size exceeded 20GB ($$CACHE_SIZE MB), cleaning old files...";
-          find /cache -type f -atime +7 -delete;
-          find /cache -type d -empty -delete;
-        fi;
-        sleep 3600;
-      done
-      '
-    networks:
-      - internal
-
-  # Open WebUI
+  # Open WebUI chat interface
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     restart: unless-stopped
     depends_on:
-      postgresql:
-        condition: service_healthy
-      vllm:
-        condition: service_healthy
+      - litellm
     environment:
-      # Database configuration
-      DATABASE_URL: postgresql://openwebui:${POSTGRES_PASSWORD:-changeme_secure_password}@postgresql:5432/openwebui
-      
-      # OpenAI API configuration for vLLM
-      OPENAI_API_BASE_URL: http://vllm:8000/v1
-      OPENAI_API_KEY: dummy-key
-      
-      # User management
-      ENABLE_SIGNUP: "false"
-      DEFAULT_USER_ROLE: "user"
-      WEBUI_AUTH: "true"
-      
-      # Admin settings - set initial admin credentials
-      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:-generate_random_secret_key_here}
-      
-      # Performance settings for 50+ users
-      WORKERS: "4"
-      TIMEOUT: "300"
-      
-      # Security
-      ENABLE_COMMUNITY_SHARING: "false"
-      ENABLE_MESSAGE_RATING: "true"
-      
-      # Model settings
-      ENABLE_MODEL_FILTER: "true"
-      MODEL_FILTER_LIST: "main-model"
-      
-      # Ollama disabled (using vLLM instead)
-      ENABLE_OLLAMA_API: "false"
-      
-      # Additional security
-      WEBUI_AUTH_TRUSTED_EMAIL_HEADER: ""
-      WEBHOOK_URL: ""
+      - OPENAI_API_BASE_URL=http://litellm:4000/v1
+      - OPENAI_API_KEY=${LITELLM_MASTER_KEY:-sk-1234}
+      - ENABLE_SIGNUP=${ENABLE_SIGNUP:-true}
+      - ENABLE_OLLAMA_API=false
+      - ENABLE_OPENAI_API=true
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-change_me_to_random_secret}
+      - DEFAULT_USER_ROLE=user
+      - WEBUI_AUTH=true
+      # Default admin user credentials
+      - WEBUI_NAME=${WEBUI_NAME:-Admin}
+      - DEFAULT_MODELS=${DEFAULT_MODELS:-vllm-model}
     volumes:
       - open_webui_data:/app/backend/data
     networks:
@@ -176,10 +99,6 @@ services:
 
 volumes:
   postgres_data:
-    driver: local
-  llm_models_value:
-    driver: local
-  vllm_cache:
     driver: local
   open_webui_data:
     driver: local

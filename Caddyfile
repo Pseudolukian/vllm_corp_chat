@@ -45,15 +45,6 @@ chat.sweetsweep.online {
         -Server
     }
     
-    # Rate limiting for DDoS protection
-    rate_limit {
-        zone dynamic {
-            key {remote_host}
-            events 100
-            window 1m
-        }
-    }
-    
     # Logging
     log {
         output file /var/log/caddy/access.log {

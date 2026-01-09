@@ -1,0 +1,13 @@
+model_list:
+  - model_name: llama3-8b
+    litellm_params:
+      model: hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct
+      api_base: https://9o1qrfpuwamaiv-8000.proxy.runpod.net/v1
+      api_key: "not-needed"
+
+general_settings:
+  master_key: sk-1234
+  set_verbose: True
+  request_timeout: 600
+  drop_params: True
+  disable_spend_logs: True

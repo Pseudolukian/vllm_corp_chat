@@ -3,101 +3,135 @@
 ## Требования
 
 - Docker и Docker Compose
-- NVIDIA GPU (RTX 6000 Ada 48GB)
-- NVIDIA Container Toolkit
 - Домен chat.sweetsweep.online с DNS записью A, указывающей на ваш сервер
+- Доступ к vLLM серверу на другой машине
+
+## Архитектура
+
+```
+Internet → Caddy (HTTPS) → OpenWebUI → LiteLLM → vLLM (remote server)
+```
+
+### Компоненты:
+
+1. **Caddy** - Reverse proxy с автоматическим SSL
+2. **OpenWebUI** - Web интерфейс для чата
+3. **LiteLLM** - Прокси для унификации API между OpenWebUI и vLLM
+4. **vLLM** - LLM сервер на отдельной машине (не в этом compose)
 
 ## Установка
 
-### 1. Настройка переменных окружения
+### 1. Клонирование репозитория
+
+```bash
+git clone https://github.com/Pseudolukian/vllm_corp_chat.git
+cd vllm_corp_chat
+```
+
+### 2. Настройка переменных окружения
 
 ```bash
 cp .env.example .env
 nano .env
 ```
 
-Измените:
-- `POSTGRES_PASSWORD` - надежный пароль для PostgreSQL
+Обязательно измените:
+
+- `VLLM_API_BASE` - URL вашего vLLM сервера (например: http://192.168.1.100:8000)
 - `WEBUI_SECRET_KEY` - сгенерируйте: `openssl rand -hex 32`
+- `LITELLM_MASTER_KEY` - ключ для доступа к LiteLLM API
 
-### 2. Подготовка модели
+### 3. Очистка старых данных и запуск
 
-Скачайте модель в директорию `llm_models_value`:
-
-```bash
-# Создайте том для моделей
-docker volume create llm_models_value
-
-# Скачайте модель (пример с использованием huggingface-cli)
-docker run --rm -v llm_models_value:/models -it python:3.11-slim bash
-pip install huggingface-hub
-huggingface-cli download meta-llama/Llama-2-7b-chat-hf --local-dir /models/models/llama-2-7b-chat-hf
-```
-
-Затем обновите в `compose.yaml` строку:
-```yaml
---model /root/.cache/huggingface/models/your-model-name
-```
-на актуальный путь к модели.
-
-### 3. Запуск сервисов
+Если вы обновляете существующую установку и хотите начать с чистого листа:
 
 ```bash
-# Запуск всех сервисов
+./clean_and_restart.sh
+```
+
+Или вручную:
+
+```bash
+# Остановка контейнеров
+docker compose down
+
+# Удаление старых томов
+docker volume rm vllm_corp_chat_ollama_data 2>/dev/null || true
+docker volume rm vllm_corp_chat_postgres_data 2>/dev/null || true  
+docker volume rm vllm_corp_chat_litellm_data 2>/dev/null || true
+docker volume rm vllm_corp_chat_open_webui_data 2>/dev/null || true
+
+# Запуск
 docker compose up -d
+```
 
-# Проверка статуса
+### 4. Проверка статуса
+
+```bash
+# Статус сервисов
 docker compose ps
 
-# Логи
+# Логи всех сервисов
 docker compose logs -f
+
+# Логи конкретного сервиса
+docker compose logs -f litellm
+docker compose logs -f open-webui
 ```
 
-### 4. Создание администратора
+### 5. Создание первого пользователя
 
-После запуска Open WebUI, создайте первого пользователя (он станет администратором):
+После запуска Open WebUI:
 
 1. Откройте https://chat.sweetsweep.online
-2. Зарегистрируйте первого пользователя - он автоматически получит права admin
-3. После этого регистрация будет отключена (`ENABLE_SIGNUP: "false"`)
+2. Зарегистрируйте первого пользователя - он автоматически станет администратором
+3. После создания админа установите в .env: `ENABLE_SIGNUP=false`
+4. Перезапустите: `docker compose restart open-webui`
 
-### 5. Добавление пользователей
+### 6. Настройка модели в OpenWebUI
 
-Только администратор может добавлять новых пользователей:
+1. Войдите как администратор
+2. Перейдите в Settings → Connections
+3. Проверьте что OpenAI API подключен к `http://litellm:4000/v1`
+4. В Settings → Models должна быть доступна модель `vllm-model`
 
-1. Войдите как admin
-2. Перейдите в Settings → Users
-3. Добавьте пользователей вручную
-4. Все новые пользователи получат роль "user" без прав управления
+## Настройка vLLM сервера
 
-## Управление кешем vLLM
+На удаленной машине с GPU запустите vLLM:
 
-Служба `vllm-cache-manager` автоматически очищает кеш:
-- Проверка каждый час
-- Удаляет файлы старше 7 дней, если размер кеша превышает 20GB
-
-Ручная очистка кеша:
 ```bash
-# Очистить весь кеш
-docker compose exec vllm-cache-manager sh -c 'rm -rf /cache/*'
-
-# Перезапустить vLLM
-docker compose restart vllm
+python -m vllm.entrypoints.openai.api_server \
+    --model YOUR_MODEL_NAME \
+    --host 0.0.0.0 \
+    --port 8000
 ```
 
-## Оптимизация для 50+ пользователей
+Или с помощью Docker:
 
-### vLLM параметры
+```bash
+docker run --gpus all \
+    -p 8000:8000 \
+    --ipc=host \
+    vllm/vllm-openai:latest \
+    --model YOUR_MODEL_NAME \
+    --host 0.0.0.0
+```
 
-- `VLLM_MAX_NUM_SEQS: 256` - максимум 256 одновременных последовательностей
-- `VLLM_GPU_MEMORY_UTILIZATION: 0.90` - использование 90% GPU памяти
-- `VLLM_ENABLE_PREFIX_CACHING: true` - кеширование общих префиксов
-- `shm_size: 16gb` - разделяемая память для батчинга
+Замените `YOUR_MODEL_NAME` на вашу модель, например:
+- `meta-llama/Llama-2-7b-chat-hf`
+- `mistralai/Mistral-7B-Instruct-v0.2`
 
-### Open WebUI параметры
+## Проверка работоспособности
 
-- `WORKERS: 4` - 4 рабочих процесса
-- `TIMEOUT: 300` - таймаут 5 минут для длинных запросов
+### Проверка LiteLLM
+
+```bash
+curl http://localhost:4000/health
+```
+
+### Проверка связи LiteLLM → vLLM
+
+```bash
 
 ### Мониторинг производительности
 
