@@ -1,5 +1,25 @@
 version: '3.8'
 
+x-litellm-common: &litellm-common
+  image: ghcr.io/berriai/litellm:main-latest
+  restart: unless-stopped
+  expose:
+    - "4000"
+  volumes:
+    - ./litellm_config.yaml:/app/config.yaml:ro
+  networks:
+    - internal
+  environment:
+    - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-1234}
+    - VLLM_API_BASE=${VLLM_API_BASE:-http://192.168.1.100:8000}
+  command: ["--config", "/app/config.yaml", "--port", "4000", "--detailed_debug"]
+  healthcheck:
+    test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')\" "]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 40s
+
 services:
   # Caddy reverse proxy with automatic TLS
   caddy:
@@ -20,8 +40,12 @@ services:
       - web
     environment:
       DOMAIN: chat.sweetsweep.online
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:2019/metrics"]
+      test: ["CMD", "wget", "--spider", "http://open-webui:8080/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -32,9 +56,12 @@ services:
     container_name: open-webui
     restart: unless-stopped
     depends_on:
-      - litellm
+      - litellm-1
+      - litellm-2
+      - litellm-3
+      - litellm-lb
     environment:
-      - OPENAI_API_BASE_URL=http://litellm:4000/v1
+      - OPENAI_API_BASE_URL=http://litellm-lb:4000/v1
       - OPENAI_API_KEY=${LITELLM_MASTER_KEY:-sk-1234}
       - ENABLE_SIGNUP=${ENABLE_SIGNUP:-true}
       - ENABLE_OLLAMA_API=false
@@ -44,6 +71,7 @@ services:
       - WEBUI_AUTH=true
       - WEBUI_NAME=${WEBUI_NAME:-Admin}
       - DEFAULT_MODELS=${DEFAULT_MODELS:-vllm-model}
+      - UVICORN_WORKERS=${UVICORN_WORKERS:-4}
     volumes:
       - open_webui_data:/app/backend/data
     networks:
@@ -55,27 +83,39 @@ services:
       timeout: 10s
       retries: 3
 
-  # LiteLLM proxy to vLLM
-  litellm:
-    image: ghcr.io/berriai/litellm:main-latest
-    container_name: litellm-proxy
-    restart: unless-stopped
+  # LiteLLM proxies to vLLM (3 dedicated containers for load spreading)
+  litellm-1:
+    <<: *litellm-common
+    container_name: litellm-proxy-1
     ports:
       - "4000:4000"
+
+  litellm-2:
+    <<: *litellm-common
+    container_name: litellm-proxy-2
+
+  litellm-3:
+    <<: *litellm-common
+    container_name: litellm-proxy-3
+
+  # Внутренний балансировщик LiteLLM (least_conn across 3 instances)
+  litellm-lb:
+    image: caddy:2-alpine
+    container_name: litellm-lb
+    restart: unless-stopped
+    depends_on:
+      - litellm-1
+      - litellm-2
+      - litellm-3
     volumes:
-      - ./litellm_config.yaml:/app/config.yaml:ro
+      - ./litellm_lb.Caddyfile:/etc/caddy/Caddyfile:ro
     networks:
       - internal
-    environment:
-      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-1234}
-      - VLLM_API_BASE=${VLLM_API_BASE:-http://192.168.1.100:8000}
-    command: ["--config", "/app/config.yaml", "--port", "4000", "--detailed_debug"]
     healthcheck:
-      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')\""]
+      test: ["CMD", "wget", "--spider", "http://localhost:4000/health/liveliness"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
 
 volumes:
   open_webui_data:
