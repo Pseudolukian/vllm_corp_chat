@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['prometheus:9090']
+
+  - job_name: cadvisor
+    static_configs:
+      - targets: ['cadvisor:8080']
+
+  - job_name: caddy
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['caddy-proxy:2019']
+
+  - job_name: litellm-lb
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['litellm-lb:2019']
+    scheme: http
+
+  - job_name: open-webui-health
+    metrics_path: /health
+    static_configs:
+      - targets: ['open-webui:8080']
+    honor_labels: true

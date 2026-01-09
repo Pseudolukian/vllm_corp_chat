@@ -1,0 +1,88 @@
+{
+  "id": null,
+  "title": "LLM Stack Overview",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "RPS Open WebUI (front Caddy)",
+      "targets": [
+        {
+          "expr": "sum(rate(caddy_http_requests_total{handler=\"reverse_proxy\", upstream=\"open-webui:8080\"}[1m]))",
+          "legendFormat": "open-webui",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {"x": 0, "y": 0, "w": 12, "h": 6}
+    },
+    {
+      "type": "timeseries",
+      "title": "RPS LiteLLM per instance (LB)",
+      "targets": [
+        {
+          "expr": "sum(rate(caddy_http_requests_total{instance=\"litellm-lb:2019\", handler=\"reverse_proxy\"}[1m])) by (upstream)",
+          "legendFormat": "{{upstream}}",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {"x": 12, "y": 0, "w": 12, "h": 6}
+    },
+    {
+      "type": "timeseries",
+      "title": "CPU by container (%)",
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_usage_seconds_total{container!=''}[1m])) by (container) * 100",
+          "legendFormat": "{{container}}",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {"x": 0, "y": 6, "w": 12, "h": 6}
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory RSS by container (MiB)",
+      "targets": [
+        {
+          "expr": "sum(container_memory_working_set_bytes{container!=''}) by (container) / 1024 / 1024",
+          "legendFormat": "{{container}}",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {"x": 12, "y": 6, "w": 12, "h": 6}
+    },
+    {
+      "type": "timeseries",
+      "title": "Disk IO bytes (reads/writes)",
+      "targets": [
+        {
+          "expr": "sum(rate(container_fs_reads_bytes_total{container!=''}[1m])) by (container)",
+          "legendFormat": "reads {{container}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(container_fs_writes_bytes_total{container!=''}[1m])) by (container)",
+          "legendFormat": "writes {{container}}",
+          "refId": "B"
+        }
+      ],
+      "gridPos": {"x": 0, "y": 12, "w": 12, "h": 6}
+    },
+    {
+      "type": "timeseries",
+      "title": "Open WebUI health latency",
+      "targets": [
+        {
+          "expr": "avg_over_time(probe_http_duration_seconds[5m])",
+          "legendFormat": "health probe",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {"x": 12, "y": 12, "w": 12, "h": 6}
+    }
+  ],
+  "templating": {"list": []},
+  "time": {"from": "now-1h", "to": "now"}
+}
