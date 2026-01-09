@@ -1,77 +1,6 @@
 version: '3.8'
 
 services:
-  # PostgreSQL for LiteLLM
-  postgres:
-    image: postgres:15-alpine
-    container_name: litellm-db
-    restart: unless-stopped
-    environment:
-      - POSTGRES_DB=litellm
-      - POSTGRES_USER=litellm
-      - POSTGRES_PASSWORD=litellm_pass
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - internal
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U litellm -d litellm"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # LiteLLM proxy to vLLM
-  litellm:
-    image: ghcr.io/berriai/litellm:main-latest
-    container_name: litellm-proxy
-    restart: unless-stopped
-    ports:
-      - "4000:4000"
-    volumes:
-      - ./litellm_config.yaml:/app/config.yaml:ro
-    networks:
-      - internal
-    environment:
-      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-1234}
-      - VLLM_API_BASE=${VLLM_API_BASE:-http://192.168.1.100:8000}
-    command: ["--config", "/app/config.yaml", "--port", "4000", "--detailed_debug"]
-    healthcheck:
-      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')\""]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # Open WebUI chat interface
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:main
-    container_name: open-webui
-    restart: unless-stopped
-    depends_on:
-      - litellm
-    environment:
-      - OPENAI_API_BASE_URL=http://litellm:4000/v1
-      - OPENAI_API_KEY=${LITELLM_MASTER_KEY:-sk-1234}
-      - ENABLE_SIGNUP=${ENABLE_SIGNUP:-true}
-      - ENABLE_OLLAMA_API=false
-      - ENABLE_OPENAI_API=true
-      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-change_me_to_random_secret}
-      - DEFAULT_USER_ROLE=user
-      - WEBUI_AUTH=true
-      # Default admin user credentials
-      - WEBUI_NAME=${WEBUI_NAME:-Admin}
-      - DEFAULT_MODELS=${DEFAULT_MODELS:-vllm-model}
-    volumes:
-      - open_webui_data:/app/backend/data
-    networks:
-      - internal
-      - web
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
   # Caddy reverse proxy with automatic TLS
   caddy:
     image: caddy:2-alpine
@@ -97,9 +26,58 @@ services:
       timeout: 10s
       retries: 3
 
+  # Open WebUI chat interface
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    depends_on:
+      - litellm
+    environment:
+      - OPENAI_API_BASE_URL=http://litellm:4000/v1
+      - OPENAI_API_KEY=${LITELLM_MASTER_KEY:-sk-1234}
+      - ENABLE_SIGNUP=${ENABLE_SIGNUP:-true}
+      - ENABLE_OLLAMA_API=false
+      - ENABLE_OPENAI_API=true
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-change_me_to_random_secret}
+      - DEFAULT_USER_ROLE=user
+      - WEBUI_AUTH=true
+      - WEBUI_NAME=${WEBUI_NAME:-Admin}
+      - DEFAULT_MODELS=${DEFAULT_MODELS:-vllm-model}
+    volumes:
+      - open_webui_data:/app/backend/data
+    networks:
+      - internal
+      - web
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # LiteLLM proxy to vLLM
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm-proxy
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml:ro
+    networks:
+      - internal
+    environment:
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-1234}
+      - VLLM_API_BASE=${VLLM_API_BASE:-http://192.168.1.100:8000}
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--detailed_debug"]
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
 volumes:
-  postgres_data:
-    driver: local
   open_webui_data:
     driver: local
   caddy_data:
