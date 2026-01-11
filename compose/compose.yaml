@@ -3,6 +3,7 @@ include:
  - path: ./liteLLM-compose.yaml
  - path: ./metrics-compose.yaml
  - path: ./openwebui-compose.yaml
+ - path: ./redis-compose.yaml
 
 volumes:
   open_webui_data:
@@ -15,6 +16,8 @@ volumes:
     driver: local
   caddy_config:
     driver: local
+  redis_cache_data:
+    driver: local    
 
 networks:
   monitoring:

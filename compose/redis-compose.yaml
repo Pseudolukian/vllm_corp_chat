@@ -1,0 +1,15 @@
+services:
+  redis-cache:
+    image: redis:7-alpine
+    container_name: redis-cache
+    restart: unless-stopped
+    command: redis-server --maxmemory ${REDIS_MAX_MEMORY} --maxmemory-policy ${REDIS_EVICTION_POLICY}
+    volumes:
+      - redis_cache_data:/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

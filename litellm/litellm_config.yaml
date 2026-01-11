@@ -21,3 +21,10 @@ general_settings:
   drop_params: True
   disable_spend_logs: True
   num_retries: 3
+  cache: True
+  cache_params:
+    type: redis
+    host: redis-cache
+    port: 6379
+    ttl: 3600  # Cache for 1 hour
+    namespace: "litellm:cache"

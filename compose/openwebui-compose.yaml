@@ -4,9 +4,9 @@ services:
     container_name: postgres-users
     restart: unless-stopped
     environment:
-      - POSTGRES_DB=openwebui
-      - POSTGRES_USER=openwebui
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-openwebui_secure_password}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - postgres_users_data:/var/lib/postgresql/data
     networks:
@@ -27,18 +27,18 @@ services:
     environment:
       - OPENAI_API_BASE_URL=http://litellm-1:4000/v1
       - OPENAI_API_KEY=${LITELLM_MASTER_KEY}
-      - DATABASE_URL=postgresql://openwebui:${POSTGRES_PASSWORD:-openwebui_secure_password}@postgres-users:5432/openwebui
-      - RESET_CONFIG_ON_START=true
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres-users:5432/${POSTGRES_DB}
+      - RESET_CONFIG_ON_START=${RESET_CONFIG_ON_START}
       - ENABLE_SIGNUP=${ENABLE_SIGNUP}
-      - ENABLE_OLLAMA_API=false
-      - ENABLE_OPENAI_API=true
+      - ENABLE_OLLAMA_API=${ENABLE_OLLAMA_API}
+      - ENABLE_OPENAI_API=${ENABLE_OPENAI_API}
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
-      - DEFAULT_USER_ROLE=user
-      - WEBUI_AUTH=true
+      - DEFAULT_USER_ROLE=${DEFAULT_USER_ROLE}
+      - WEBUI_AUTH=${WEBUI_AUTH}
       - WEBUI_NAME=${WEBUI_NAME}
       - DEFAULT_MODELS=${DEFAULT_MODELS}
       - UVICORN_WORKERS=${UVICORN_WORKERS}
-      - BYPASS_MODEL_ACCESS_CONTROL=true
+      - BYPASS_MODEL_ACCESS_CONTROL=${BYPASS_MODEL_ACCESS_CONTROL}
     volumes:
       - open_webui_data:/app/backend/data
     networks:
