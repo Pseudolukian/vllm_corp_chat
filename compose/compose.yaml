@@ -1,0 +1,26 @@
+include:
+ - path: ./caddy-compose.yaml
+ - path: ./liteLLM-compose.yaml
+ - path: ./metrics-compose.yaml
+ - path: ./openwebui-compose.yaml
+
+volumes:
+  open_webui_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
+
+networks:
+  monitoring:
+    driver: bridge
+  internal:
+    driver: bridge
+  web:
+    driver: bridge
+
