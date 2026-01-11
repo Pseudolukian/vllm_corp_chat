@@ -1,88 +1,291 @@
 {
   "id": null,
+  "uid": "llm-stack-overview",
   "title": "LLM Stack Overview",
   "timezone": "browser",
   "schemaVersion": 36,
-  "version": 1,
+  "version": 2,
   "panels": [
     {
       "type": "timeseries",
-      "title": "RPS Open WebUI (front Caddy)",
+      "title": "Caddy RPS (Requests per Second)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "targets": [
         {
-          "expr": "sum(rate(caddy_http_requests_total{handler=\"reverse_proxy\", upstream=\"open-webui:8080\"}[1m]))",
-          "legendFormat": "open-webui",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(caddy_http_requests_total[1m])) by (server)",
+          "legendFormat": "{{server}}",
           "refId": "A"
         }
       ],
-      "gridPos": {"x": 0, "y": 0, "w": 12, "h": 6}
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 6
+      }
     },
     {
       "type": "timeseries",
-      "title": "RPS LiteLLM per instance (LB)",
+      "title": "Caddy Response Duration (seconds)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "targets": [
         {
-          "expr": "sum(rate(caddy_http_requests_total{instance=\"litellm-lb:2019\", handler=\"reverse_proxy\"}[1m])) by (upstream)",
-          "legendFormat": "{{upstream}}",
-          "refId": "A"
-        }
-      ],
-      "gridPos": {"x": 12, "y": 0, "w": 12, "h": 6}
-    },
-    {
-      "type": "timeseries",
-      "title": "CPU by container (%)",
-      "targets": [
-        {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{container!=''}[1m])) by (container) * 100",
-          "legendFormat": "{{container}}",
-          "refId": "A"
-        }
-      ],
-      "gridPos": {"x": 0, "y": 6, "w": 12, "h": 6}
-    },
-    {
-      "type": "timeseries",
-      "title": "Memory RSS by container (MiB)",
-      "targets": [
-        {
-          "expr": "sum(container_memory_working_set_bytes{container!=''}) by (container) / 1024 / 1024",
-          "legendFormat": "{{container}}",
-          "refId": "A"
-        }
-      ],
-      "gridPos": {"x": 12, "y": 6, "w": 12, "h": 6}
-    },
-    {
-      "type": "timeseries",
-      "title": "Disk IO bytes (reads/writes)",
-      "targets": [
-        {
-          "expr": "sum(rate(container_fs_reads_bytes_total{container!=''}[1m])) by (container)",
-          "legendFormat": "reads {{container}}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "histogram_quantile(0.99, sum(rate(caddy_http_response_duration_seconds_bucket[5m])) by (le, server))",
+          "legendFormat": "P99 {{server}}",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(container_fs_writes_bytes_total{container!=''}[1m])) by (container)",
-          "legendFormat": "writes {{container}}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "histogram_quantile(0.50, sum(rate(caddy_http_response_duration_seconds_bucket[5m])) by (le, server))",
+          "legendFormat": "P50 {{server}}",
           "refId": "B"
         }
       ],
-      "gridPos": {"x": 0, "y": 12, "w": 12, "h": 6}
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 6
+      }
     },
     {
       "type": "timeseries",
-      "title": "Open WebUI health latency",
+      "title": "CPU Usage by Container (%)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "targets": [
         {
-          "expr": "avg_over_time(probe_http_duration_seconds[5m])",
-          "legendFormat": "health probe",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(container_cpu_usage_seconds_total{name!=\"\"}[1m])) by (name) * 100",
+          "legendFormat": "{{name}}",
           "refId": "A"
         }
       ],
-      "gridPos": {"x": 12, "y": 12, "w": 12, "h": 6}
+      "gridPos": {
+        "x": 0,
+        "y": 6,
+        "w": 12,
+        "h": 6
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory Usage by Container (MiB)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(container_memory_working_set_bytes{name!=\"\"}) by (name) / 1024 / 1024",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 6,
+        "w": 12,
+        "h": 6
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Network I/O by Container (bytes/sec)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(container_network_receive_bytes_total{name!=\"\"}[1m])) by (name)",
+          "legendFormat": "RX {{name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(container_network_transmit_bytes_total{name!=\"\"}[1m])) by (name)",
+          "legendFormat": "TX {{name}}",
+          "refId": "B"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 12,
+        "w": 12,
+        "h": 6
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Disk I/O by Container (bytes/sec)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(container_fs_reads_bytes_total{name!=\"\"}[1m])) by (name)",
+          "legendFormat": "reads {{name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(container_fs_writes_bytes_total{name!=\"\"}[1m])) by (name)",
+          "legendFormat": "writes {{name}}",
+          "refId": "B"
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 12,
+        "w": 12,
+        "h": 6
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Total Containers Running",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "count(container_cpu_usage_seconds_total{name!=\"\"})",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 18,
+        "w": 6,
+        "h": 4
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Caddy Upstreams Healthy",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(caddy_reverse_proxy_upstreams_healthy)",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "x": 6,
+        "y": 18,
+        "w": 6,
+        "h": 4
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Total HTTP Requests (1h)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(increase(caddy_http_requests_total[1h]))",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 18,
+        "w": 6,
+        "h": 4
+      }
+    },
+    {
+      "type": "stat",
+      "title": "HTTP Error Rate (%)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(caddy_http_request_errors_total[5m])) / sum(rate(caddy_http_requests_total[5m])) * 100",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "x": 18,
+        "y": 18,
+        "w": 6,
+        "h": 4
+      }
     }
   ],
-  "templating": {"list": []},
-  "time": {"from": "now-1h", "to": "now"}
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "refresh": "30s"
 }
