@@ -1,11 +1,33 @@
 services:
+  postgres-users:
+    image: postgres:16-alpine
+    container_name: postgres-users
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=openwebui
+      - POSTGRES_USER=openwebui
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-openwebui_secure_password}
+    volumes:
+      - postgres_users_data:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openwebui"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     restart: unless-stopped
+    depends_on:
+      postgres-users:
+        condition: service_healthy
     environment:
       - OPENAI_API_BASE_URL=http://litellm-1:4000/v1
       - OPENAI_API_KEY=${LITELLM_MASTER_KEY}
+      - DATABASE_URL=postgresql://openwebui:${POSTGRES_PASSWORD:-openwebui_secure_password}@postgres-users:5432/openwebui
       - RESET_CONFIG_ON_START=true
       - ENABLE_SIGNUP=${ENABLE_SIGNUP}
       - ENABLE_OLLAMA_API=false
@@ -27,5 +49,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
- 
-      
+
+volumes:
+  postgres_users_data:
+    driver: local
