@@ -44,6 +44,7 @@ services:
     networks:
       - internal
       - web
+      - monitoring
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s

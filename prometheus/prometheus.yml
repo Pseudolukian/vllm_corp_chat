@@ -27,3 +27,27 @@ scrape_configs:
     static_configs:
       - targets: ['open-webui:8080']
     honor_labels: true
+
+  - job_name: litellm-metrics
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['litellm-proxy-1:4000']
+    scheme: http
+
+  - job_name: vllm-pod1
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['9o1qrfpuwamaiv-8000.proxy.runpod.net']
+        labels:
+          pod: 'pod1'
+          model: 'llama3-8b'
+    scheme: https
+
+  - job_name: vllm-pod2
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['33pi69ozbz1sw5-8000.proxy.runpod.net']
+        labels:
+          pod: 'pod2'
+          model: 'llama3-8b'
+    scheme: https

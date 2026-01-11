@@ -28,3 +28,10 @@ general_settings:
     port: 6379
     ttl: 3600  # Cache for 1 hour
     namespace: "litellm:cache"
+  
+  # Prometheus metrics
+  success_callback: ["prometheus"]
+  failure_callback: ["prometheus"]
+  
+  # Service callbacks for metrics tracking
+  service_callback: ["prometheus"]

@@ -16,6 +16,7 @@ services:
       - caddy_config:/config
     networks:
       - web
+      - monitoring
     environment:
       DOMAIN: ${DOMAIN}
     ulimits:
