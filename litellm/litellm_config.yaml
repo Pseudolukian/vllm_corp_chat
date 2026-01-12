@@ -6,17 +6,29 @@ model_list:
       api_key: os.environ/VLLM_API_KEY
       num_retries: 3
       timeout: 300
+    model_info:
+      id: vllm-pod1
   - model_name: os.environ/MODEL_NAME
     litellm_params:
       model: os.environ/MODEL_PATH
       api_base: os.environ/VLLM_API_BASE_2
       api_key: os.environ/VLLM_API_KEY
       num_retries: 3
-      timeout: 300      
+      timeout: 300
+    model_info:
+      id: vllm-pod2      
 
 litellm_settings:
   callbacks: ["prometheus"]
   service_callback: ["prometheus_system"]
+
+router_settings:
+  routing_strategy: simple-shuffle
+  num_retries: 3
+  timeout: 300
+  allowed_fails: 3
+  cooldown_time: 60
+  enable_pre_call_checks: true
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
