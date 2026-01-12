@@ -5,9 +5,19 @@ x-litellm-common: &litellm-common
     - "4000"
   volumes:
     - ../litellm/litellm_config.yaml:/app/config.yaml:ro
+    - prometheus-multiproc:/prometheus_multiproc
   environment:
+    - PROMETHEUS_MULTIPROC_DIR=/prometheus_multiproc
+    - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY}
     - REDIS_HOST=${REDIS_HOST}
     - REDIS_PORT=${REDIS_PORT}
+    - REDIS_CACHE_TTL=${REDIS_CACHE_TTL}
+    - REDIS_CACHE_NAMESPACE=${REDIS_CACHE_NAMESPACE}
+    - MODEL_NAME=${MODEL_NAME}
+    - MODEL_PATH=${MODEL_PATH}
+    - VLLM_API_BASE_1=${VLLM_API_BASE_1}
+    - VLLM_API_BASE_2=${VLLM_API_BASE_2}
+    - VLLM_API_KEY=${VLLM_API_KEY}
   networks:
     - internal
     - monitoring
@@ -26,3 +36,6 @@ services:
     <<: *litellm-common
     container_name: litellm-proxy-1
 
+volumes:
+  prometheus-multiproc:
+    driver: local

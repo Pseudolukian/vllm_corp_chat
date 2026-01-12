@@ -1,21 +1,25 @@
 model_list:
-  - model_name: llama3-8b
+  - model_name: os.environ/MODEL_NAME
     litellm_params:
-      model: hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct
-      api_base: https://9o1qrfpuwamaiv-8000.proxy.runpod.net/v1
-      api_key: "not-needed"
+      model: os.environ/MODEL_PATH
+      api_base: os.environ/VLLM_API_BASE_1
+      api_key: os.environ/VLLM_API_KEY
       num_retries: 3
       timeout: 300
-  - model_name: llama3-8b
+  - model_name: os.environ/MODEL_NAME
     litellm_params:
-      model: hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct
-      api_base: https://33pi69ozbz1sw5-8000.proxy.runpod.net/v1
-      api_key: "not-needed"
+      model: os.environ/MODEL_PATH
+      api_base: os.environ/VLLM_API_BASE_2
+      api_key: os.environ/VLLM_API_KEY
       num_retries: 3
       timeout: 300      
 
+litellm_settings:
+  callbacks: ["prometheus"]
+  service_callback: ["prometheus_system"]
+
 general_settings:
-  master_key: sk-1234
+  master_key: os.environ/LITELLM_MASTER_KEY
   set_verbose: True
   request_timeout: 600
   drop_params: True
@@ -24,14 +28,7 @@ general_settings:
   cache: True
   cache_params:
     type: redis
-    host: redis-cache
-    port: 6379
-    ttl: 3600  # Cache for 1 hour
-    namespace: "litellm:cache"
-  
-  # Prometheus metrics
-  success_callback: ["prometheus"]
-  failure_callback: ["prometheus"]
-  
-  # Service callbacks for metrics tracking
-  service_callback: ["prometheus"]
+    host: os.environ/REDIS_HOST
+    port: os.environ/REDIS_PORT
+    ttl: os.environ/REDIS_CACHE_TTL
+    namespace: os.environ/REDIS_CACHE_NAMESPACE

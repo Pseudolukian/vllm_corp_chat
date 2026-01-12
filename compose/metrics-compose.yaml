@@ -66,3 +66,9 @@ services:
       - monitoring
     profiles:
       - metrics
+
+volumes:
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local

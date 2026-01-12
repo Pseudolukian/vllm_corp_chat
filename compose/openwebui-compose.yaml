@@ -54,3 +54,5 @@ services:
 volumes:
   postgres_users_data:
     driver: local
+  open_webui_data:
+    driver: local  

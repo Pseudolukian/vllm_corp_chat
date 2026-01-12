@@ -5,20 +5,6 @@ include:
  - path: ./openwebui-compose.yaml
  - path: ./redis-compose.yaml
 
-volumes:
-  open_webui_data:
-    driver: local
-  prometheus_data:
-    driver: local
-  grafana_data:
-    driver: local
-  caddy_data:
-    driver: local
-  caddy_config:
-    driver: local
-  redis_cache_data:
-    driver: local    
-
 networks:
   monitoring:
     driver: bridge
