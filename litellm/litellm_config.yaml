@@ -21,6 +21,14 @@ model_list:
 litellm_settings:
   callbacks: ["prometheus"]
   service_callback: ["prometheus_system"]
+  set_verbose: True
+  cache: True
+  cache_params:
+    type: redis
+    host: os.environ/REDIS_HOST
+    port: os.environ/REDIS_PORT
+    ttl: os.environ/REDIS_CACHE_TTL
+    namespace: os.environ/REDIS_CACHE_NAMESPACE
 
 router_settings:
   routing_strategy: simple-shuffle
@@ -32,15 +40,6 @@ router_settings:
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
-  set_verbose: True
   request_timeout: 600
   drop_params: True
   disable_spend_logs: True
-  num_retries: 3
-  cache: True
-  cache_params:
-    type: redis
-    host: os.environ/REDIS_HOST
-    port: os.environ/REDIS_PORT
-    ttl: os.environ/REDIS_CACHE_TTL
-    namespace: os.environ/REDIS_CACHE_NAMESPACE

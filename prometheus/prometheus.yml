@@ -34,6 +34,12 @@ scrape_configs:
       - targets: ['litellm-proxy-1:4000']
     scheme: http
 
+  - job_name: redis
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['redis-exporter:9121']
+    scheme: http
+
   - job_name: vllm-pod1
     metrics_path: /metrics
     static_configs:

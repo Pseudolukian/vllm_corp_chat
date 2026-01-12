@@ -4,6 +4,9 @@ services:
     container_name: redis-cache
     restart: unless-stopped
     command: redis-server --maxmemory ${REDIS_MAX_MEMORY} --maxmemory-policy ${REDIS_EVICTION_POLICY}
+    environment:
+      - REDIS_MAX_MEMORY=${REDIS_MAX_MEMORY}
+      - REDIS_EVICTION_POLICY=${REDIS_EVICTION_POLICY}
     volumes:
       - redis_cache_data:/data
     networks:
@@ -13,6 +16,19 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  redis-exporter:
+    image: oliver006/redis_exporter:alpine
+    container_name: redis-exporter
+    restart: unless-stopped
+    command: --redis.addr=redis-cache:6379
+    networks:
+      - internal
+      - monitoring
+    depends_on:
+      - redis-cache
+    expose:
+      - "9121"
 
 volumes:
   redis_cache_data:
