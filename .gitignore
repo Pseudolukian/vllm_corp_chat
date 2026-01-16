@@ -1,1 +1,3 @@
-./compose/.env
+compose/.env
+*.env
+!compose/.env.template
