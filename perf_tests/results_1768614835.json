@@ -1,0 +1,25 @@
+[
+  {
+    "index": 2,
+    "question": "зачем нужен спутник связи",
+    "status": "success",
+    "latency": 0.050537824630737305,
+    "tokens": 519,
+    "response_length": 1970
+  },
+  {
+    "index": 0,
+    "question": "почему небо голубое",
+    "status": "error",
+    "latency": 0.11182427406311035,
+    "error": "HTTP 404: {\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: Hosted_vllmException - Error code: 404. Received Model Group=hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct\\nAvailable Model Group Fallbac"
+  },
+  {
+    "index": 1,
+    "question": "как работает холодильник",
+    "status": "success",
+    "latency": 33.424615144729614,
+    "tokens": 515,
+    "response_length": 1690
+  }
+]

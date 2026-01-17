@@ -1,0 +1,1595 @@
+[
+  {
+    "index": 3,
+    "question": "как устроен интернет",
+    "status": "success",
+    "latency": 0.0715639591217041,
+    "tokens": 517,
+    "response_length": 1698
+  },
+  {
+    "index": 1,
+    "question": "как работает холодильник",
+    "status": "success",
+    "latency": 0.1567695140838623,
+    "tokens": 515,
+    "response_length": 1690
+  },
+  {
+    "index": 2,
+    "question": "зачем нужен спутник связи",
+    "status": "success",
+    "latency": 0.17249298095703125,
+    "tokens": 519,
+    "response_length": 1970
+  },
+  {
+    "index": 5,
+    "question": "как летает самолёт",
+    "status": "success",
+    "latency": 0.17795395851135254,
+    "tokens": 428,
+    "response_length": 1405
+  },
+  {
+    "index": 6,
+    "question": "как появляется радуга",
+    "status": "success",
+    "latency": 0.19979333877563477,
+    "tokens": 488,
+    "response_length": 1592
+  },
+  {
+    "index": 8,
+    "question": "как работает лазер",
+    "status": "success",
+    "latency": 0.21139240264892578,
+    "tokens": 516,
+    "response_length": 1735
+  },
+  {
+    "index": 9,
+    "question": "что такое облачные вычисления",
+    "status": "success",
+    "latency": 0.21193742752075195,
+    "tokens": 518,
+    "response_length": 1852
+  },
+  {
+    "index": 11,
+    "question": "почему меняются времена года",
+    "status": "success",
+    "latency": 0.15596652030944824,
+    "tokens": 517,
+    "response_length": 1784
+  },
+  {
+    "index": 13,
+    "question": "как работает микроволновка",
+    "status": "success",
+    "latency": 0.1457993984222412,
+    "tokens": 518,
+    "response_length": 1674
+  },
+  {
+    "index": 14,
+    "question": "что такое супервулкан",
+    "status": "success",
+    "latency": 0.15880060195922852,
+    "tokens": 516,
+    "response_length": 1708
+  },
+  {
+    "index": 15,
+    "question": "как работает электрическая сеть",
+    "status": "success",
+    "latency": 0.16294145584106445,
+    "tokens": 520,
+    "response_length": 1568
+  },
+  {
+    "index": 16,
+    "question": "почему море солёное",
+    "status": "success",
+    "latency": 0.16440391540527344,
+    "tokens": 477,
+    "response_length": 1508
+  },
+  {
+    "index": 7,
+    "question": "как устроен gps",
+    "status": "error",
+    "latency": 0.5274429321289062,
+    "error": "HTTP 404: {\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: Hosted_vllmException - Error code: 404. Received Model Group=hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct\\nAvailable Model Group Fallbac"
+  },
+  {
+    "index": 21,
+    "question": "почему корабли не тонут",
+    "status": "success",
+    "latency": 0.18421339988708496,
+    "tokens": 430,
+    "response_length": 1914
+  },
+  {
+    "index": 12,
+    "question": "как формируются облака",
+    "status": "error",
+    "latency": 0.5020954608917236,
+    "error": "HTTP 404: {\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: Hosted_vllmException - Error code: 404. Received Model Group=hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct\\nAvailable Model Group Fallbac"
+  },
+  {
+    "index": 10,
+    "question": "как тренируют нейросети",
+    "status": "error",
+    "latency": 0.6019227504730225,
+    "error": "HTTP 404: {\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: Hosted_vllmException - Error code: 404. Received Model Group=hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct\\nAvailable Model Group Fallbac"
+  },
+  {
+    "index": 0,
+    "question": "почему небо голубое",
+    "status": "error",
+    "latency": 0.6809113025665283,
+    "error": "HTTP 404: {\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: Hosted_vllmException - Error code: 404. Received Model Group=hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct\\nAvailable Model Group Fallbac"
+  },
+  {
+    "index": 4,
+    "question": "что такое квантовая запутанность",
+    "status": "error",
+    "latency": 0.7310464382171631,
+    "error": "HTTP 404: {\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: Hosted_vllmException - Error code: 404. Received Model Group=hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct\\nAvailable Model Group Fallbac"
+  },
+  {
+    "index": 23,
+    "question": "как устроен 3d-принтер",
+    "status": "success",
+    "latency": 0.17092680931091309,
+    "tokens": 521,
+    "response_length": 1785
+  },
+  {
+    "index": 24,
+    "question": "как возникает ветер",
+    "status": "success",
+    "latency": 0.12769460678100586,
+    "tokens": 515,
+    "response_length": 1888
+  },
+  {
+    "index": 25,
+    "question": "как работают солнечные панели",
+    "status": "success",
+    "latency": 0.12848424911499023,
+    "tokens": 519,
+    "response_length": 1734
+  },
+  {
+    "index": 26,
+    "question": "как устроена гидроэлектростанция",
+    "status": "success",
+    "latency": 0.12984919548034668,
+    "tokens": 523,
+    "response_length": 1598
+  },
+  {
+    "index": 27,
+    "question": "почему листва зеленеет весной",
+    "status": "success",
+    "latency": 0.11213231086730957,
+    "tokens": 519,
+    "response_length": 1810
+  },
+  {
+    "index": 28,
+    "question": "как строят мосты",
+    "status": "success",
+    "latency": 0.10210895538330078,
+    "tokens": 517,
+    "response_length": 1567
+  },
+  {
+    "index": 29,
+    "question": "что такое генетический алгоритм",
+    "status": "success",
+    "latency": 0.10628509521484375,
+    "tokens": 519,
+    "response_length": 1602
+  },
+  {
+    "index": 30,
+    "question": "как работает навигация в самолётах",
+    "status": "success",
+    "latency": 0.10614347457885742,
+    "tokens": 521,
+    "response_length": 1710
+  },
+  {
+    "index": 31,
+    "question": "как добывают нефть",
+    "status": "success",
+    "latency": 0.11036229133605957,
+    "tokens": 517,
+    "response_length": 1622
+  },
+  {
+    "index": 32,
+    "question": "почему происходит смена дня и ночи",
+    "status": "success",
+    "latency": 0.10201740264892578,
+    "tokens": 519,
+    "response_length": 1698
+  },
+  {
+    "index": 33,
+    "question": "как работает холодильный цикл",
+    "status": "success",
+    "latency": 0.10059881210327148,
+    "tokens": 496,
+    "response_length": 1650
+  },
+  {
+    "index": 34,
+    "question": "что такое биометрия",
+    "status": "success",
+    "latency": 0.10031247138977051,
+    "tokens": 515,
+    "response_length": 1683
+  },
+  {
+    "index": 35,
+    "question": "как делают карты погоды",
+    "status": "success",
+    "latency": 0.10031747817993164,
+    "tokens": 518,
+    "response_length": 1837
+  },
+  {
+    "index": 36,
+    "question": "как работает радар",
+    "status": "success",
+    "latency": 0.10884332656860352,
+    "tokens": 515,
+    "response_length": 1677
+  },
+  {
+    "index": 37,
+    "question": "как запускают ракеты",
+    "status": "success",
+    "latency": 0.1099848747253418,
+    "tokens": 518,
+    "response_length": 1706
+  },
+  {
+    "index": 38,
+    "question": "как устроены подводные лодки",
+    "status": "success",
+    "latency": 0.10778141021728516,
+    "tokens": 521,
+    "response_length": 1693
+  },
+  {
+    "index": 39,
+    "question": "как делают бетон",
+    "status": "success",
+    "latency": 0.11125826835632324,
+    "tokens": 516,
+    "response_length": 1691
+  },
+  {
+    "index": 40,
+    "question": "что такое искусственный интеллект",
+    "status": "success",
+    "latency": 0.11406993865966797,
+    "tokens": 518,
+    "response_length": 1770
+  },
+  {
+    "index": 41,
+    "question": "как работают светофоры",
+    "status": "success",
+    "latency": 0.09921717643737793,
+    "tokens": 496,
+    "response_length": 1833
+  },
+  {
+    "index": 42,
+    "question": "как устроен лифт",
+    "status": "success",
+    "latency": 0.10395050048828125,
+    "tokens": 517,
+    "response_length": 1597
+  },
+  {
+    "index": 43,
+    "question": "как работает автопилот",
+    "status": "success",
+    "latency": 0.1046292781829834,
+    "tokens": 517,
+    "response_length": 2082
+  },
+  {
+    "index": 44,
+    "question": "как возникает гром",
+    "status": "success",
+    "latency": 0.10007357597351074,
+    "tokens": 514,
+    "response_length": 1656
+  },
+  {
+    "index": 45,
+    "question": "почему сверкает молния",
+    "status": "success",
+    "latency": 0.09614944458007812,
+    "tokens": 400,
+    "response_length": 1340
+  },
+  {
+    "index": 46,
+    "question": "как работает сейсмограф",
+    "status": "success",
+    "latency": 0.09699892997741699,
+    "tokens": 517,
+    "response_length": 1624
+  },
+  {
+    "index": 47,
+    "question": "что такое нейрон",
+    "status": "success",
+    "latency": 0.10239720344543457,
+    "tokens": 494,
+    "response_length": 1564
+  },
+  {
+    "index": 48,
+    "question": "как печатают деньги",
+    "status": "success",
+    "latency": 0.10344481468200684,
+    "tokens": 516,
+    "response_length": 1709
+  },
+  {
+    "index": 49,
+    "question": "как устроен интернет-банк",
+    "status": "success",
+    "latency": 0.10910415649414062,
+    "tokens": 519,
+    "response_length": 1722
+  },
+  {
+    "index": 51,
+    "question": "как происходит переработка пластика",
+    "status": "success",
+    "latency": 0.10786724090576172,
+    "tokens": 519,
+    "response_length": 1775
+  },
+  {
+    "index": 50,
+    "question": "как работают системы умный дом",
+    "status": "success",
+    "latency": 0.11416077613830566,
+    "tokens": 518,
+    "response_length": 1971
+  },
+  {
+    "index": 53,
+    "question": "как делают шоколад",
+    "status": "success",
+    "latency": 0.10991120338439941,
+    "tokens": 405,
+    "response_length": 1208
+  },
+  {
+    "index": 52,
+    "question": "как устроены беспилотники",
+    "status": "success",
+    "latency": 0.11328268051147461,
+    "tokens": 519,
+    "response_length": 1715
+  },
+  {
+    "index": 54,
+    "question": "как работает холодильный компрессор",
+    "status": "success",
+    "latency": 0.10599207878112793,
+    "tokens": 518,
+    "response_length": 2502
+  },
+  {
+    "index": 55,
+    "question": "как устроена стиральная машина",
+    "status": "success",
+    "latency": 0.10607242584228516,
+    "tokens": 520,
+    "response_length": 1677
+  },
+  {
+    "index": 56,
+    "question": "как работают электромагниты",
+    "status": "success",
+    "latency": 0.10657620429992676,
+    "tokens": 521,
+    "response_length": 1531
+  },
+  {
+    "index": 58,
+    "question": "как строят туннели",
+    "status": "success",
+    "latency": 0.11102652549743652,
+    "tokens": 518,
+    "response_length": 2314
+  },
+  {
+    "index": 57,
+    "question": "что такое биопластик",
+    "status": "success",
+    "latency": 0.11305737495422363,
+    "tokens": 517,
+    "response_length": 1589
+  },
+  {
+    "index": 59,
+    "question": "как работает лидара",
+    "status": "success",
+    "latency": 0.1242060661315918,
+    "tokens": 516,
+    "response_length": 1621
+  },
+  {
+    "index": 60,
+    "question": "как создают карты",
+    "status": "success",
+    "latency": 0.12297844886779785,
+    "tokens": 516,
+    "response_length": 1700
+  },
+  {
+    "index": 61,
+    "question": "как работает api метеоданных",
+    "status": "success",
+    "latency": 0.12272310256958008,
+    "tokens": 518,
+    "response_length": 1678
+  },
+  {
+    "index": 62,
+    "question": "как работает спутниковая съёмка",
+    "status": "success",
+    "latency": 0.1219637393951416,
+    "tokens": 520,
+    "response_length": 1714
+  },
+  {
+    "index": 63,
+    "question": "почему на луне нет атмосферы",
+    "status": "success",
+    "latency": 0.1221153736114502,
+    "tokens": 369,
+    "response_length": 1183
+  },
+  {
+    "index": 64,
+    "question": "как устроена система gps времени",
+    "status": "success",
+    "latency": 0.11309957504272461,
+    "tokens": 518,
+    "response_length": 1750
+  },
+  {
+    "index": 65,
+    "question": "как работают квантовые компьютеры",
+    "status": "success",
+    "latency": 0.11470150947570801,
+    "tokens": 522,
+    "response_length": 1723
+  },
+  {
+    "index": 66,
+    "question": "что такое файловая система",
+    "status": "success",
+    "latency": 0.11465978622436523,
+    "tokens": 515,
+    "response_length": 1828
+  },
+  {
+    "index": 67,
+    "question": "как шифруется https",
+    "status": "success",
+    "latency": 0.10492491722106934,
+    "tokens": 488,
+    "response_length": 2416
+  },
+  {
+    "index": 68,
+    "question": "как устроены видеокарты",
+    "status": "success",
+    "latency": 0.10564398765563965,
+    "tokens": 519,
+    "response_length": 1780
+  },
+  {
+    "index": 69,
+    "question": "как работает кэш в процессорах",
+    "status": "success",
+    "latency": 0.10537481307983398,
+    "tokens": 520,
+    "response_length": 1618
+  },
+  {
+    "index": 70,
+    "question": "почему нужно обновлять софт",
+    "status": "success",
+    "latency": 0.10677742958068848,
+    "tokens": 518,
+    "response_length": 1938
+  },
+  {
+    "index": 71,
+    "question": "как работают батареи",
+    "status": "success",
+    "latency": 0.11512207984924316,
+    "tokens": 516,
+    "response_length": 1701
+  },
+  {
+    "index": 72,
+    "question": "что такое токенизация",
+    "status": "success",
+    "latency": 0.10703682899475098,
+    "tokens": 516,
+    "response_length": 1788
+  },
+  {
+    "index": 73,
+    "question": "как устроен мессенджер",
+    "status": "success",
+    "latency": 0.10852622985839844,
+    "tokens": 520,
+    "response_length": 1825
+  },
+  {
+    "index": 74,
+    "question": "как работает стриминг видео",
+    "status": "success",
+    "latency": 0.10912394523620605,
+    "tokens": 518,
+    "response_length": 1825
+  },
+  {
+    "index": 75,
+    "question": "как рассчитывают кредитный рейтинг",
+    "status": "success",
+    "latency": 0.10782527923583984,
+    "tokens": 519,
+    "response_length": 1783
+  },
+  {
+    "index": 76,
+    "question": "как работают recommendation системы",
+    "status": "success",
+    "latency": 0.09844088554382324,
+    "tokens": 516,
+    "response_length": 1846
+  },
+  {
+    "index": 77,
+    "question": "что такое edge computing",
+    "status": "success",
+    "latency": 0.11213517189025879,
+    "tokens": 514,
+    "response_length": 2712
+  },
+  {
+    "index": 78,
+    "question": "как устроены базы данных",
+    "status": "success",
+    "latency": 0.1093144416809082,
+    "tokens": 518,
+    "response_length": 1792
+  },
+  {
+    "index": 79,
+    "question": "как работает dns",
+    "status": "success",
+    "latency": 0.11235308647155762,
+    "tokens": 514,
+    "response_length": 1748
+  },
+  {
+    "index": 80,
+    "question": "что такое docker",
+    "status": "success",
+    "latency": 0.1121983528137207,
+    "tokens": 513,
+    "response_length": 1806
+  },
+  {
+    "index": 81,
+    "question": "как работают контейнеры",
+    "status": "success",
+    "latency": 0.11348533630371094,
+    "tokens": 518,
+    "response_length": 1644
+  },
+  {
+    "index": 83,
+    "question": "как работает ci cd",
+    "status": "success",
+    "latency": 0.10884761810302734,
+    "tokens": 515,
+    "response_length": 1792
+  },
+  {
+    "index": 82,
+    "question": "как устроен kubernetes",
+    "status": "success",
+    "latency": 0.11339163780212402,
+    "tokens": 517,
+    "response_length": 1901
+  },
+  {
+    "index": 84,
+    "question": "что такое graphql",
+    "status": "success",
+    "latency": 0.11165452003479004,
+    "tokens": 502,
+    "response_length": 1880
+  },
+  {
+    "index": 85,
+    "question": "как работает rest api",
+    "status": "success",
+    "latency": 0.11142420768737793,
+    "tokens": 515,
+    "response_length": 1895
+  },
+  {
+    "index": 86,
+    "question": "как устроен вебсокет",
+    "status": "success",
+    "latency": 0.11771988868713379,
+    "tokens": 519,
+    "response_length": 1717
+  },
+  {
+    "index": 87,
+    "question": "как работает тор",
+    "status": "success",
+    "latency": 0.11171221733093262,
+    "tokens": 514,
+    "response_length": 1762
+  },
+  {
+    "index": 88,
+    "question": "что такое cdn",
+    "status": "success",
+    "latency": 0.11187124252319336,
+    "tokens": 514,
+    "response_length": 1728
+  },
+  {
+    "index": 89,
+    "question": "как работает балансировщик",
+    "status": "success",
+    "latency": 0.10877823829650879,
+    "tokens": 517,
+    "response_length": 1744
+  },
+  {
+    "index": 90,
+    "question": "как устроены очереди сообщений",
+    "status": "success",
+    "latency": 0.10971689224243164,
+    "tokens": 519,
+    "response_length": 1794
+  },
+  {
+    "index": 91,
+    "question": "как работает cron",
+    "status": "success",
+    "latency": 0.10297012329101562,
+    "tokens": 514,
+    "response_length": 1551
+  },
+  {
+    "index": 92,
+    "question": "как устроен мониторинг систем",
+    "status": "success",
+    "latency": 0.10286259651184082,
+    "tokens": 519,
+    "response_length": 1906
+  },
+  {
+    "index": 93,
+    "question": "как работает firewall",
+    "status": "success",
+    "latency": 0.10382390022277832,
+    "tokens": 514,
+    "response_length": 1931
+  },
+  {
+    "index": 94,
+    "question": "как устроен vpn",
+    "status": "success",
+    "latency": 0.10257911682128906,
+    "tokens": 516,
+    "response_length": 1813
+  },
+  {
+    "index": 96,
+    "question": "как работает oauth",
+    "status": "success",
+    "latency": 0.10106539726257324,
+    "tokens": 514,
+    "response_length": 1976
+  },
+  {
+    "index": 95,
+    "question": "почему важен zero trust",
+    "status": "success",
+    "latency": 0.11992955207824707,
+    "tokens": 516,
+    "response_length": 2712
+  },
+  {
+    "index": 97,
+    "question": "как устроен sso",
+    "status": "success",
+    "latency": 0.11682724952697754,
+    "tokens": 517,
+    "response_length": 1941
+  },
+  {
+    "index": 98,
+    "question": "как работает ssl рукопожатие",
+    "status": "success",
+    "latency": 0.11682510375976562,
+    "tokens": 519,
+    "response_length": 1729
+  },
+  {
+    "index": 99,
+    "question": "как устроены push уведомления",
+    "status": "success",
+    "latency": 0.12151074409484863,
+    "tokens": 520,
+    "response_length": 1970
+  },
+  {
+    "index": 100,
+    "question": "приведи пример curl запроса к rest",
+    "status": "success",
+    "latency": 0.12485361099243164,
+    "tokens": 367,
+    "response_length": 1240
+  },
+  {
+    "index": 101,
+    "question": "напиши bash скрипт копии файла",
+    "status": "success",
+    "latency": 0.11361932754516602,
+    "tokens": 336,
+    "response_length": 1044
+  },
+  {
+    "index": 103,
+    "question": "пример подключения к postgres на golang",
+    "status": "success",
+    "latency": 0.1071929931640625,
+    "tokens": 518,
+    "response_length": 1710
+  },
+  {
+    "index": 102,
+    "question": "как сделать post запрос в python requests",
+    "status": "success",
+    "latency": 0.11082792282104492,
+    "tokens": 465,
+    "response_length": 1730
+  },
+  {
+    "index": 104,
+    "question": "как читать env в node.js",
+    "status": "success",
+    "latency": 0.09582018852233887,
+    "tokens": 464,
+    "response_length": 1657
+  },
+  {
+    "index": 105,
+    "question": "пример dockerfile для node",
+    "status": "success",
+    "latency": 0.09494662284851074,
+    "tokens": 515,
+    "response_length": 1508
+  },
+  {
+    "index": 106,
+    "question": "как написать compose для redis",
+    "status": "success",
+    "latency": 0.08967018127441406,
+    "tokens": 440,
+    "response_length": 1545
+  },
+  {
+    "index": 108,
+    "question": "как настроить healthcheck в compose",
+    "status": "success",
+    "latency": 0.10244441032409668,
+    "tokens": 519,
+    "response_length": 1679
+  },
+  {
+    "index": 107,
+    "question": "пример kubectl rollout restart",
+    "status": "success",
+    "latency": 0.10662674903869629,
+    "tokens": 321,
+    "response_length": 1399
+  },
+  {
+    "index": 109,
+    "question": "как сделать миграцию alembic",
+    "status": "success",
+    "latency": 0.10443258285522461,
+    "tokens": 520,
+    "response_length": 1765
+  },
+  {
+    "index": 110,
+    "question": "пример sqlalchemy модели",
+    "status": "success",
+    "latency": 0.10602712631225586,
+    "tokens": 513,
+    "response_length": 2016
+  },
+  {
+    "index": 111,
+    "question": "как настроить logging в python",
+    "status": "success",
+    "latency": 0.1118316650390625,
+    "tokens": 518,
+    "response_length": 2032
+  },
+  {
+    "index": 112,
+    "question": "как вызвать функцию aws lambda из cli",
+    "status": "success",
+    "latency": 0.09859108924865723,
+    "tokens": 488,
+    "response_length": 1754
+  },
+  {
+    "index": 113,
+    "question": "пример cloudwatch логов запроса",
+    "status": "success",
+    "latency": 0.09860706329345703,
+    "tokens": 517,
+    "response_length": 1487
+  },
+  {
+    "index": 114,
+    "question": "как сделать retry в axios",
+    "status": "success",
+    "latency": 0.10387253761291504,
+    "tokens": 438,
+    "response_length": 1668
+  },
+  {
+    "index": 115,
+    "question": "пример jest теста",
+    "status": "success",
+    "latency": 0.10417890548706055,
+    "tokens": 426,
+    "response_length": 1385
+  },
+  {
+    "index": 116,
+    "question": "как написать mock в pytest",
+    "status": "success",
+    "latency": 0.10866236686706543,
+    "tokens": 517,
+    "response_length": 1974
+  },
+  {
+    "index": 117,
+    "question": "пример fastapi эндпоинта get",
+    "status": "success",
+    "latency": 0.10789895057678223,
+    "tokens": 416,
+    "response_length": 1387
+  },
+  {
+    "index": 118,
+    "question": "как сделать background task в fastapi",
+    "status": "success",
+    "latency": 0.1077888011932373,
+    "tokens": 518,
+    "response_length": 1862
+  },
+  {
+    "index": 119,
+    "question": "пример middleware в express",
+    "status": "success",
+    "latency": 0.10143423080444336,
+    "tokens": 514,
+    "response_length": 1906
+  },
+  {
+    "index": 120,
+    "question": "как добавить cors в express",
+    "status": "success",
+    "latency": 0.10116815567016602,
+    "tokens": 516,
+    "response_length": 1853
+  },
+  {
+    "index": 121,
+    "question": "пример grpc определения сервиса",
+    "status": "success",
+    "latency": 0.09469795227050781,
+    "tokens": 518,
+    "response_length": 2091
+  },
+  {
+    "index": 122,
+    "question": "как сгенерировать grpc stubs python",
+    "status": "success",
+    "latency": 0.10027384757995605,
+    "tokens": 499,
+    "response_length": 1852
+  },
+  {
+    "index": 123,
+    "question": "как настроить nginx reverse proxy",
+    "status": "success",
+    "latency": 0.1012110710144043,
+    "tokens": 518,
+    "response_length": 1815
+  },
+  {
+    "index": 124,
+    "question": "пример ansible playbook деплоя",
+    "status": "success",
+    "latency": 0.10285019874572754,
+    "tokens": 516,
+    "response_length": 1651
+  },
+  {
+    "index": 125,
+    "question": "как написать github actions ci для tests",
+    "status": "success",
+    "latency": 0.10219001770019531,
+    "tokens": 519,
+    "response_length": 1770
+  },
+  {
+    "index": 126,
+    "question": "пример .gitignore для python",
+    "status": "success",
+    "latency": 0.10530447959899902,
+    "tokens": 386,
+    "response_length": 1168
+  },
+  {
+    "index": 127,
+    "question": "как собрать фронт vite",
+    "status": "success",
+    "latency": 0.10077571868896484,
+    "tokens": 518,
+    "response_length": 1586
+  },
+  {
+    "index": 128,
+    "question": "пример webpack alias",
+    "status": "success",
+    "latency": 0.1018373966217041,
+    "tokens": 477,
+    "response_length": 1736
+  },
+  {
+    "index": 129,
+    "question": "как настроить eslint + prettier",
+    "status": "success",
+    "latency": 0.08020424842834473,
+    "tokens": 519,
+    "response_length": 1663
+  },
+  {
+    "index": 130,
+    "question": "пример husky pre-commit",
+    "status": "success",
+    "latency": 18.851975202560425,
+    "tokens": 407,
+    "response_length": 1660
+  },
+  {
+    "index": 19,
+    "question": "что такое блокчейн",
+    "status": "success",
+    "latency": 24.425170183181763,
+    "tokens": 515,
+    "response_length": 1862
+  },
+  {
+    "index": 18,
+    "question": "как измеряют землетрясения",
+    "status": "success",
+    "latency": 24.46518349647522,
+    "tokens": 519,
+    "response_length": 1719
+  },
+  {
+    "index": 17,
+    "question": "как строят небоскрёбы",
+    "status": "success",
+    "latency": 24.543558597564697,
+    "tokens": 519,
+    "response_length": 1815
+  },
+  {
+    "index": 20,
+    "question": "как работает wi-fi",
+    "status": "success",
+    "latency": 24.466005325317383,
+    "tokens": 515,
+    "response_length": 1607
+  },
+  {
+    "index": 132,
+    "question": "пример redis pub sub",
+    "status": "success",
+    "latency": 22.057878732681274,
+    "tokens": 474,
+    "response_length": 1652
+  },
+  {
+    "index": 134,
+    "question": "пример producer kafka на go",
+    "status": "success",
+    "latency": 23.921693086624146,
+    "tokens": 515,
+    "response_length": 1817
+  },
+  {
+    "index": 131,
+    "question": "как сделать feature flag в code",
+    "status": "success",
+    "latency": 23.98983144760132,
+    "tokens": 517,
+    "response_length": 2389
+  },
+  {
+    "index": 133,
+    "question": "как читать kafka в python",
+    "status": "success",
+    "latency": 24.122634649276733,
+    "tokens": 517,
+    "response_length": 1892
+  },
+  {
+    "index": 22,
+    "question": "как делают стекло",
+    "status": "success",
+    "latency": 38.34769296646118,
+    "tokens": 516,
+    "response_length": 1576
+  },
+  {
+    "index": 142,
+    "question": "пример configmap с env",
+    "status": "success",
+    "latency": 16.76490092277527,
+    "tokens": 364,
+    "response_length": 1262
+  },
+  {
+    "index": 135,
+    "question": "как добавить tracing opentelemetry",
+    "status": "success",
+    "latency": 24.100719451904297,
+    "tokens": 517,
+    "response_length": 1714
+  },
+  {
+    "index": 138,
+    "question": "пример grafana запроса promql",
+    "status": "success",
+    "latency": 22.403337240219116,
+    "tokens": 485,
+    "response_length": 1716
+  },
+  {
+    "index": 139,
+    "question": "как написать terraform ресурс s3",
+    "status": "success",
+    "latency": 23.30359959602356,
+    "tokens": 504,
+    "response_length": 1692
+  },
+  {
+    "index": 136,
+    "question": "пример prometheus экспорта метрик",
+    "status": "success",
+    "latency": 23.932467222213745,
+    "tokens": 518,
+    "response_length": 1771
+  },
+  {
+    "index": 137,
+    "question": "как сделать alertmanager правило",
+    "status": "success",
+    "latency": 23.977099657058716,
+    "tokens": 516,
+    "response_length": 1908
+  },
+  {
+    "index": 140,
+    "question": "пример kubernetes ingress",
+    "status": "success",
+    "latency": 23.89452290534973,
+    "tokens": 514,
+    "response_length": 2050
+  },
+  {
+    "index": 141,
+    "question": "как добавить livenessprobe",
+    "status": "success",
+    "latency": 23.915609121322632,
+    "tokens": 516,
+    "response_length": 2051
+  },
+  {
+    "index": 143,
+    "question": "как смонтировать secret в pod",
+    "status": "success",
+    "latency": 24.132159948349,
+    "tokens": 519,
+    "response_length": 1908
+  },
+  {
+    "index": 145,
+    "question": "как выкатывать helm upgrade",
+    "status": "success",
+    "latency": 17.924351453781128,
+    "tokens": 387,
+    "response_length": 1557
+  },
+  {
+    "index": 154,
+    "question": "пример sql запроса с join",
+    "status": "error",
+    "latency": 0.10480380058288574,
+    "error": "HTTP 404: {\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: Hosted_vllmException - Error code: 404. Received Model Group=hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct\\nAvailable Model Group Fallbac"
+  },
+  {
+    "index": 146,
+    "question": "пример ci шага docker buildx",
+    "status": "success",
+    "latency": 16.36139464378357,
+    "tokens": 354,
+    "response_length": 1224
+  },
+  {
+    "index": 144,
+    "question": "пример helm values",
+    "status": "success",
+    "latency": 24.010937213897705,
+    "tokens": 513,
+    "response_length": 1902
+  },
+  {
+    "index": 147,
+    "question": "как пушить образ в ghcr",
+    "status": "success",
+    "latency": 20.37235713005066,
+    "tokens": 441,
+    "response_length": 1357
+  },
+  {
+    "index": 152,
+    "question": "пример postgres COPY из csv",
+    "status": "success",
+    "latency": 20.556045055389404,
+    "tokens": 444,
+    "response_length": 1501
+  },
+  {
+    "index": 148,
+    "question": "пример python asyncio gather",
+    "status": "success",
+    "latency": 23.796014547348022,
+    "tokens": 514,
+    "response_length": 1988
+  },
+  {
+    "index": 149,
+    "question": "как написать контекстный менеджер",
+    "status": "success",
+    "latency": 23.753225088119507,
+    "tokens": 518,
+    "response_length": 1934
+  },
+  {
+    "index": 150,
+    "question": "пример dataclass python",
+    "status": "success",
+    "latency": 23.892427682876587,
+    "tokens": 514,
+    "response_length": 1693
+  },
+  {
+    "index": 151,
+    "question": "как сериализовать pydantic модель",
+    "status": "success",
+    "latency": 23.899404048919678,
+    "tokens": 520,
+    "response_length": 1823
+  },
+  {
+    "index": 153,
+    "question": "как настроить pg_dump бэкап",
+    "status": "success",
+    "latency": 23.794555187225342,
+    "tokens": 520,
+    "response_length": 1562
+  },
+  {
+    "index": 155,
+    "question": "как писать индексы в postgres",
+    "status": "success",
+    "latency": 24.025100231170654,
+    "tokens": 520,
+    "response_length": 1782
+  },
+  {
+    "index": 156,
+    "question": "пример миграции knex",
+    "status": "success",
+    "latency": 24.122504234313965,
+    "tokens": 516,
+    "response_length": 1762
+  },
+  {
+    "index": 157,
+    "question": "как сделать seed в prisma",
+    "status": "success",
+    "latency": 23.837368726730347,
+    "tokens": 517,
+    "response_length": 1797
+  },
+  {
+    "index": 158,
+    "question": "пример prisma schema модели",
+    "status": "success",
+    "latency": 23.941838264465332,
+    "tokens": 515,
+    "response_length": 1811
+  },
+  {
+    "index": 162,
+    "question": "пример загрузки файла через curl",
+    "status": "success",
+    "latency": 20.99479651451111,
+    "tokens": 453,
+    "response_length": 1586
+  },
+  {
+    "index": 163,
+    "question": "как сделать multipart в requests",
+    "status": "success",
+    "latency": 21.27727723121643,
+    "tokens": 460,
+    "response_length": 1710
+  },
+  {
+    "index": 159,
+    "question": "как настроить prisma migrate",
+    "status": "success",
+    "latency": 23.919277667999268,
+    "tokens": 518,
+    "response_length": 1743
+  },
+  {
+    "index": 160,
+    "question": "пример запросов в supabase",
+    "status": "success",
+    "latency": 23.93326449394226,
+    "tokens": 516,
+    "response_length": 1774
+  },
+  {
+    "index": 161,
+    "question": "как использовать s3 pre-signed url",
+    "status": "success",
+    "latency": 23.919875383377075,
+    "tokens": 518,
+    "response_length": 2063
+  },
+  {
+    "index": 164,
+    "question": "пример websocket клиента js",
+    "status": "success",
+    "latency": 23.924114227294922,
+    "tokens": 515,
+    "response_length": 1966
+  },
+  {
+    "index": 168,
+    "question": "пример celery task с eta",
+    "status": "success",
+    "latency": 18.013070583343506,
+    "tokens": 392,
+    "response_length": 1374
+  },
+  {
+    "index": 165,
+    "question": "как сделать reconnect websocket",
+    "status": "success",
+    "latency": 24.17352056503296,
+    "tokens": 515,
+    "response_length": 2092
+  },
+  {
+    "index": 166,
+    "question": "пример worker для bullmq",
+    "status": "success",
+    "latency": 24.029353618621826,
+    "tokens": 515,
+    "response_length": 1778
+  },
+  {
+    "index": 167,
+    "question": "как настроить celery beat",
+    "status": "success",
+    "latency": 23.936033487319946,
+    "tokens": 517,
+    "response_length": 1645
+  },
+  {
+    "index": 174,
+    "question": "пример istio virtualservice",
+    "status": "success",
+    "latency": 17.043012619018555,
+    "tokens": 369,
+    "response_length": 1449
+  },
+  {
+    "index": 169,
+    "question": "как добавить redis sentinel",
+    "status": "success",
+    "latency": 23.83332133293152,
+    "tokens": 515,
+    "response_length": 2197
+  },
+  {
+    "index": 170,
+    "question": "пример circuit breaker в java",
+    "status": "success",
+    "latency": 23.9301495552063,
+    "tokens": 515,
+    "response_length": 2380
+  },
+  {
+    "index": 171,
+    "question": "как сделать rate limit в nginx",
+    "status": "success",
+    "latency": 23.848514556884766,
+    "tokens": 517,
+    "response_length": 1922
+  },
+  {
+    "index": 172,
+    "question": "пример lua для nginx",
+    "status": "success",
+    "latency": 23.85433053970337,
+    "tokens": 514,
+    "response_length": 1873
+  },
+  {
+    "index": 173,
+    "question": "как настроить hpa в k8s",
+    "status": "success",
+    "latency": 24.02606439590454,
+    "tokens": 521,
+    "response_length": 1739
+  },
+  {
+    "index": 175,
+    "question": "как включить mtls в istio",
+    "status": "success",
+    "latency": 24.05674147605896,
+    "tokens": 519,
+    "response_length": 2064
+  },
+  {
+    "index": 176,
+    "question": "пример envoy фильтра",
+    "status": "success",
+    "latency": 24.14146661758423,
+    "tokens": 516,
+    "response_length": 2074
+  },
+  {
+    "index": 177,
+    "question": "как сделать канареечный диплой",
+    "status": "success",
+    "latency": 23.866861581802368,
+    "tokens": 521,
+    "response_length": 2175
+  },
+  {
+    "index": 186,
+    "question": "пример oauth device flow",
+    "status": "error",
+    "latency": 0.29867076873779297,
+    "error": "HTTP 404: {\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: Hosted_vllmException - Error code: 404. Received Model Group=hosted_vllm/NousResearch/Meta-Llama-3-8B-Instruct\\nAvailable Model Group Fallbac"
+  },
+  {
+    "index": 178,
+    "question": "пример rollout blue green",
+    "status": "success",
+    "latency": 23.964986562728882,
+    "tokens": 514,
+    "response_length": 2401
+  },
+  {
+    "index": 179,
+    "question": "как добавить feature toggle в frontend",
+    "status": "success",
+    "latency": 24.15156126022339,
+    "tokens": 517,
+    "response_length": 2346
+  },
+  {
+    "index": 184,
+    "question": "пример auth middleware next",
+    "status": "success",
+    "latency": 20.08378267288208,
+    "tokens": 434,
+    "response_length": 1681
+  },
+  {
+    "index": 180,
+    "question": "пример react query запроса",
+    "status": "success",
+    "latency": 23.956454753875732,
+    "tokens": 515,
+    "response_length": 1869
+  },
+  {
+    "index": 181,
+    "question": "как использовать swr хук",
+    "status": "success",
+    "latency": 23.86699938774109,
+    "tokens": 517,
+    "response_length": 1750
+  },
+  {
+    "index": 182,
+    "question": "пример next.js api route",
+    "status": "success",
+    "latency": 23.853480577468872,
+    "tokens": 515,
+    "response_length": 1819
+  },
+  {
+    "index": 183,
+    "question": "как сделать ssr в next",
+    "status": "success",
+    "latency": 23.928282499313354,
+    "tokens": 517,
+    "response_length": 1882
+  },
+  {
+    "index": 188,
+    "question": "пример secret rotation",
+    "status": "success",
+    "latency": 22.111773014068604,
+    "tokens": 475,
+    "response_length": 2012
+  },
+  {
+    "index": 187,
+    "question": "как сделать refresh токен в jwt",
+    "status": "success",
+    "latency": 22.732914447784424,
+    "tokens": 489,
+    "response_length": 2103
+  },
+  {
+    "index": 185,
+    "question": "как подключить keycloak oidc",
+    "status": "success",
+    "latency": 24.155128479003906,
+    "tokens": 518,
+    "response_length": 1936
+  },
+  {
+    "index": 189,
+    "question": "как подписывать jwt rsa",
+    "status": "success",
+    "latency": 23.923192501068115,
+    "tokens": 517,
+    "response_length": 1686
+  },
+  {
+    "index": 190,
+    "question": "пример http_signature заголовка",
+    "status": "success",
+    "latency": 20.33301281929016,
+    "tokens": 440,
+    "response_length": 1719
+  },
+  {
+    "index": 194,
+    "question": "пример winston формата",
+    "status": "success",
+    "latency": 17.45228409767151,
+    "tokens": 378,
+    "response_length": 1249
+  },
+  {
+    "index": 191,
+    "question": "как сделать idempotency ключ",
+    "status": "success",
+    "latency": 23.809362173080444,
+    "tokens": 514,
+    "response_length": 2215
+  },
+  {
+    "index": 192,
+    "question": "пример идемпотентного api",
+    "status": "success",
+    "latency": 23.859684467315674,
+    "tokens": 518,
+    "response_length": 1884
+  },
+  {
+    "index": 193,
+    "question": "как логировать body в express",
+    "status": "success",
+    "latency": 23.7393856048584,
+    "tokens": 518,
+    "response_length": 1981
+  },
+  {
+    "index": 195,
+    "question": "как настроить morgan в express",
+    "status": "success",
+    "latency": 22.558872938156128,
+    "tokens": 485,
+    "response_length": 2011
+  },
+  {
+    "index": 196,
+    "question": "пример python structlog",
+    "status": "success",
+    "latency": 21.496326446533203,
+    "tokens": 467,
+    "response_length": 1600
+  },
+  {
+    "index": 198,
+    "question": "пример taskfile.yml",
+    "status": "success",
+    "latency": 20.441617250442505,
+    "tokens": 450,
+    "response_length": 1394
+  },
+  {
+    "index": 197,
+    "question": "как делать dependency injection в fastapi",
+    "status": "success",
+    "latency": 23.529714107513428,
+    "tokens": 518,
+    "response_length": 2144
+  },
+  {
+    "index": 199,
+    "question": "как сделать makefile для тестов",
+    "status": "success",
+    "latency": 23.306745529174805,
+    "tokens": 518,
+    "response_length": 1678
+  }
+]
